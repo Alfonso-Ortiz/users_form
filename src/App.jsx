@@ -50,6 +50,7 @@ function App() {
             deleteUser={deleteUser}
             setUpdateInfo={setUpdateInfo}
             setCloseForm={setCloseForm}
+            alert={alertUsers}
           />
         ))}
       </div>

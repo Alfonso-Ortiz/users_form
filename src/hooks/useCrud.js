@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+
 const useCrud = () => {
   const [users, setUsers] = useState();
 
@@ -29,6 +30,7 @@ const useCrud = () => {
       .then((res) => {
         console.log(res.data);
         getAllUsers();
+        sweetAlert;
       })
       .catch((err) => console.log(err));
   };

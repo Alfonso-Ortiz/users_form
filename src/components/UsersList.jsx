@@ -1,10 +1,34 @@
 import React from "react";
 import "./styles/userList.css";
+import Swal from "sweetalert2";
 
 const UsersList = ({ user, deleteUser, setUpdateInfo, setCloseForm }) => {
   const handleUpdate = () => {
     setUpdateInfo(user);
     setCloseForm(false);
+  };
+
+  const sweetAlert = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(user.id);
+        Swal.fire("El usuario", "ha sido eliminado", "success");
+      } else {
+        Swal.fire("No se elimino ningun usuario", "", "error");
+      }
+    });
+  };
+
+  const handleTrashBtn = () => {
+    sweetAlert();
   };
 
   return (
@@ -25,10 +49,7 @@ const UsersList = ({ user, deleteUser, setUpdateInfo, setCloseForm }) => {
         </li>
       </ul>
       <footer className="card__footer">
-        <button
-          className="card__btn card__btn-trash"
-          onClick={() => deleteUser(user.id)}
-        >
+        <button className="card__btn card__btn-trash" onClick={handleTrashBtn}>
           <i className="fa-solid fa-trash-can"></i>
         </button>
         <button className="card__btn card__btn-update" onClick={handleUpdate}>
